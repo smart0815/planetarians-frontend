@@ -1,0 +1,32 @@
+@media screen and (min-width: 993px){
+    .innerPage {
+        /* grid-area: 2 / 2 / 6 / 6;
+        margin: 0.5rem 1rem; */
+        margin: 1.5rem 5rem;
+    }
+}
+@media screen and (max-width: 992px){
+    .innerPage {
+        /* grid-area: 2 / 2 / 6 / 6;
+        margin: 0.5rem 1rem; */
+        margin: 1.5rem 5rem;
+    }
+}
+.innerPage{
+    background: #121311c7;
+    border: 6px solid #4d5d83bf;
+    border-radius: 24px;
+}
+
+.cosmic  {
+    border: 1px solid gray !important;
+    background-color: #3c3b3b !important;
+    color: white !important;
+    border-radius: 25px !important;
+    padding: 13px 70px !important;
+    min-width: 308px !important;
+}
+
+.text-center {
+    text-align: center !important;
+}

@@ -27,7 +27,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Square-Bold';
-  background-image: url('../public/bg.png');
+  background-image: rgba(0, 0, 0, 0.7) url('../public/bg.png');
+  background-blend-mode: darken;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

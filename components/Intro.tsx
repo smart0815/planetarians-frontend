@@ -97,26 +97,26 @@ const Intro: FC<Props> = (props) => {
               <Grid container spacing={2} alignItems="center" justifyContent="space-around">
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Staked Gensis</Typography>
+                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Staked Founder</Typography>
                     <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.totalKamCnt} </Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Staked Pet</Typography>
+                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Staked Companion</Typography>
                     <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.totalMegamCnt} </Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
                     <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>You’ve staked</Typography>
-                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.stakedKamNFTCnt} <span style={{ color: "#f99a00", fontSize: "60%" }}>Gensis</span></Typography>
+                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.stakedKamNFTCnt} <span style={{ color: "#f99a00", fontSize: "60%" }}>Founder</span></Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
                     <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>You’ve staked</Typography>
-                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.stakedMegamNFTCnt} <span style={{ color: "#f99a00", fontSize: "60%" }}>Pet</span></Typography>
+                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.stakedMegamNFTCnt} <span style={{ color: "#f99a00", fontSize: "60%" }}>Companion</span></Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>

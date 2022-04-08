@@ -97,13 +97,13 @@ const Intro: FC<Props> = (props) => {
               <Grid container spacing={2} alignItems="center" justifyContent="space-around">
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>All Staked Founder</Typography>
+                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Total Founders Staked</Typography>
                     <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.totalKamCnt} </Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Staked Companion</Typography>
+                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Total Companions Staked</Typography>
                     <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.totalMegamCnt} </Typography>
                   </div>
                 </Grid>

@@ -42,7 +42,6 @@ const Home: NextPage = () => {
   }
 
   const unstakeAll = async () => {
-    console.log("============")
     if (!publicKey || !signTransaction) return
 
     setLoading(true)
@@ -113,7 +112,7 @@ const Home: NextPage = () => {
     <>
       {
         loading && <div className="loading-container">
-          <MagicSpinner size={170} color="#DF402B" />
+          <MagicSpinner size={170} color="#2bc8df" />
         </div>
       }
       <Layout>

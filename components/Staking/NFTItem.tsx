@@ -126,8 +126,8 @@ const NFTItem: FC<Props> = (props) => {
 
       // await connection.confirmTransaction(signature)
       let nftType = ""
-      if (nftData.NFT.name.includes("Gensis")) {
-        nftType = "Gensis"
+      if (nftData.NFT.name.includes("Planetarians")) {
+        nftType = "Planetarians"
       } else if (nftData.NFT.name.includes("Pet")) {
         nftType = "Pet"
       }

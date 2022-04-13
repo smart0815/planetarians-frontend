@@ -86,7 +86,7 @@ const Intro: FC<Props> = (props) => {
     <div className={classes.container}>
       <Container>
         <Typography variant="h5">
-          Stake and Gain $ORB
+          Stake and Gain $ORBZ
         </Typography>
         <Grid container columnSpacing={{ md: 2 }} rowSpacing={{ md: 0, xs: 2 }} style={{ marginTop: 30 }}>
           <Grid item xs={12}>
@@ -122,7 +122,7 @@ const Intro: FC<Props> = (props) => {
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
                     <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Your rewards</Typography>
-                    <Typography variant="h2" style={{ color: "#7bb664" }}>+{parseFloat(stakedInfo.tokenCnt.toFixed(3))} <span style={{ color: "#7bb664", fontSize: "60%" }}>$ORB</span></Typography>
+                    <Typography variant="h2" style={{ color: "#7bb664" }}>+{parseFloat(stakedInfo.tokenCnt.toFixed(3))} <span style={{ color: "#7bb664", fontSize: "60%" }}>$ORBZ</span></Typography>
                   </div>
                 </Grid>
               </Grid>

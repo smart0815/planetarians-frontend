@@ -125,7 +125,7 @@ const Staking: FC<Props> = (props) => {
       {/* {props.children} */}
       <p className="text-center" style={{ padding: "20px", fontSize: "22px" }}>Outer Cosmos</p>
       <Typography className="text-center" variant="overline" display="block" gutterBottom>
-        Stake Planetarian Founders and Planetarian Companions to earn $ORB
+        Stake Planetarian Founders and Planetarian Companions to earn $ORBZ
       </Typography>
       <Grid container spacing={2}>
         <Grid item sm={4} xs={12}>
@@ -174,7 +174,7 @@ const Staking: FC<Props> = (props) => {
           <div style={{ padding: '15px 60px' }}>
             <p className="text-center" style={{ color: '#38d7ab' }}>STAKED</p>
             <Typography className="text-center" variant="overline" display="block" gutterBottom>
-              Expedition for $ORB
+              Expedition for $ORBZ
             </Typography>
           </div>
           <div className="inPageContainer">

@@ -3,8 +3,8 @@
 
 export const routes = [
   { name: "Staking", link: "/" },
-  { name: "Roadmap", link: "/" },
-  { name: "Rarity", link: "/" },
-  { name: "Manga", link: "/" },
-  { name: "Airdrop", link: "/" },
+  // { name: "Roadmap", link: "/" },
+  // { name: "Rarity", link: "/" },
+  // { name: "Manga", link: "/" },
+  // { name: "Airdrop", link: "/" },
 ];

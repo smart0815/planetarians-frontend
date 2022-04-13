@@ -120,40 +120,53 @@ const NFTItem: FC<Props> = (props) => {
 
       const signature = await sendTransaction(transaction, connection)
       const response = await connection.confirmTransaction(signature, 'processed')
+      if (signature) { // check the signature
+        try {
+          const res = await axios.get(`https://public-api.solscan.io/transaction/${signature}`, {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          if (res.status === 200) {
+            // const signed = await signTransaction(transaction)
+            // const signature = await connection.sendRawTransaction(signed.serialize())
 
-      // const signed = await signTransaction(transaction)
-      // const signature = await connection.sendRawTransaction(signed.serialize())
+            // await connection.confirmTransaction(signature)
+            let nftType = "";
+            if (nftData.NFT.name.includes("Planetarians")) {
+              nftType = "Planetarians"
+            } else if (nftData.NFT.name.includes("Pet")) {
+              nftType = "Pet"
+            }
 
-      // await connection.confirmTransaction(signature)
-      let nftType = ""
-      if (nftData.NFT.name.includes("Planetarians")) {
-        nftType = "Planetarians"
-      } else if (nftData.NFT.name.includes("Pet")) {
-        nftType = "Pet"
-      }
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/stake_nft`, {
+              walletAddress: publicKey.toString(),
+              mintAddress: nftData.mint,
+              transactionAddress: signature,
+              nftType
+            }, {
+              headers: {
+                "Access-Control-Allow-Origin": "*"
+              }
+            })
+            if (data.success) {
+              toast.update(toastId, {
+                render: `${nftData.NFT.name} staked!`,
+                type: "success"
+              })
 
-      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/stake_nft`, {
-        walletAddress: publicKey.toString(),
-        mintAddress: nftData.mint,
-        transactionAddress: signature,
-        nftType
-      }, {
-        headers: {
-          "Access-Control-Allow-Origin": "*"
+              setStaked(nftData.mint, true)
+            } else {
+              toast.update(toastId, {
+                render: `Something went wrong!`,
+                type: "error"
+              })
+            }
+          }
+        } catch (error) {
+          console.log(error)
         }
-      })
-      if (data.success) {
-        toast.update(toastId, {
-          render: `${nftData.NFT.name} staked!`,
-          type: "success"
-        })
-
-        setStaked(nftData.mint, true)
-      } else {
-        toast.update(toastId, {
-          render: `Something went wrong!`,
-          type: "error"
-        })
       }
     } catch (error: any) {
       console.log(error)

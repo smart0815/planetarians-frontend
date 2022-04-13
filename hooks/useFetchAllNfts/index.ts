@@ -6,6 +6,7 @@ import { PublicKey } from "@solana/web3.js"
 import { useWallet, useConnection } from "@solana/wallet-adapter-react"
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata"
 import { NFT, NFTmap } from "../../types/metadata"
+import TutorialDataService from "./tutorial.service";
 
 const useFetchAllNfts = (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
   const wallet = useWallet()
@@ -20,11 +21,14 @@ const useFetchAllNfts = (setLoading: React.Dispatch<React.SetStateAction<boolean
         try {
           setNFTList([])
 
-          const nftData = await getParsedNftAccountsByOwner({
-            publicAddress: wallet.publicKey?.toString(),
-            connection: connection
-          })
-          nftData.forEach(async (element) => {
+          // const nftData = await getParsedNftAccountsByOwner({
+          //   publicAddress: "Cmay1CUVYY1o459k6qBPgRUzTWhHNKXrx2sG3g3Xgrdj",
+          //   connection: connection
+          // })
+          const nftData = await TutorialDataService.getHolderVerify(wallet.publicKey?.toString())
+
+          //@ts-ignore
+          nftData.data.forEach(async (element) => {
             if (JSON.parse(process.env.NEXT_PUBLIC_NFT_UPDATE_AUTHORITY!).includes(element.updateAuthority)) {
               const { data } = await axios.get<NFT>(element.data.uri)
               console.log(data, element.mint)
@@ -39,6 +43,7 @@ const useFetchAllNfts = (setLoading: React.Dispatch<React.SetStateAction<boolean
               "Access-Control-Allow-Origin": "*"
             }
           })
+
           data.map(async (mintAddr: string) => {
             const mintPubkey = new PublicKey(mintAddr)
             const tokenmetaPubkey = await Metadata.getPDA(mintPubkey)

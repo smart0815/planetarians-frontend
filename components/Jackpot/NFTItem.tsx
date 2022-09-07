@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
 import { makeStyles, useTheme } from "@mui/styles"
 import {
+  Box,
+  Grid,
   Typography,
   Button
 } from '@mui/material'
@@ -19,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 interface Props {
   nftData: NFTmap
+  setSelect: any
   setStaked: (mintAddr: string, status: boolean) => void
   setLoading: (loading: boolean) => void
   loading: boolean
@@ -45,12 +48,37 @@ const useStyles = makeStyles((theme) => ({
   },
   unstakeBtn: {
     background: "linear-gradient(360deg, #9D74FF 0%, #8957FF 100%)"
-  }
+  },
+  symbol: {
+    marginBottom: '5px',
+    fontWeight: 400,
+    fontSize: '12px',
+    lineHeight: '12px',
+    color: '#EAEAEA',
+  },
+  collectionName: {
+    marginBottom: '5px',
+    fontWeight: 400,
+    fontSize: '12px',
+    lineHeight: '12px',
+    color: '#636363',
+  },
+  floorPrice: {
+    background: 'linear-gradient(180deg, #41DD55 0%, #41AA38 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    textFillColor: 'transparent',
+    fontWeight: 400,
+    fontSize: '12px',
+    lineHeight: '12px',
+    textShadow: '0px 0px 10px rgba(91, 179, 102, 0.6)'
+  },
 }))
 
 const NFTItem: FC<Props> = (props) => {
   const classes = useStyles()
-  const { nftData, setStaked, setLoading, loading } = props
+  const { nftData, setStaked, setSelect, setLoading, loading } = props
 
   const { connection } = useConnection()
   const { publicKey, signTransaction, sendTransaction } = useWallet()
@@ -75,7 +103,9 @@ const NFTItem: FC<Props> = (props) => {
       if (!publicKey || !signTransaction) throw new WalletNotConnectedError()
 
       const toPublicKey = new PublicKey(process.env.NEXT_PUBLIC_LOCKED_WALLET!)
-
+      console.log(publicKey);
+      console.log(nftData.mint);
+      console.log(process.env.NEXT_PUBLIC_LOCKED_WALLET);
       const fromTokenAccount = await getOrCreateAssociatedTokenAccount(
         connection,
         publicKey,
@@ -83,6 +113,8 @@ const NFTItem: FC<Props> = (props) => {
         publicKey,
         signTransaction
       )
+
+      console.log("here");
       const toTokenAccount = await getOrCreateAssociatedTokenAccount(
         connection,
         publicKey,
@@ -99,14 +131,6 @@ const NFTItem: FC<Props> = (props) => {
           [],
           1
         )
-        // createTransferInstruction(
-        //   fromTokenAccount.address, // source
-        //   toTokenAccount.address, // dest
-        //   publicKey,
-        //   1,
-        //   [],
-        //   TOKEN_PROGRAM_ID
-        // )
       ).add(
         SystemProgram.transfer({
           fromPubkey: publicKey,
@@ -122,48 +146,40 @@ const NFTItem: FC<Props> = (props) => {
       const response = await connection.confirmTransaction(signature, 'processed')
       if (signature) { // check the signature
         try {
-          const res = await axios.get(`https://public-api.solscan.io/transaction/${signature}`, {
-            method: "GET",
+          // const res = await axios.get(`https://public-api.solscan.io/transaction/${signature}`, {
+          //   method: "GET",
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   }
+          // })
+          // if (res.status === 200) {
+          // const signed = await signTransaction(transaction)
+          // const signature = await connection.sendRawTransaction(signed.serialize())
+
+          // await connection.confirmTransaction(signature)
+          const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/stake_nft`, {
+            walletAddress: publicKey.toString(),
+            mintAddress: nftData.mint,
+            transactionAddress: signature,
+          }, {
             headers: {
-              'Content-Type': 'application/json'
+              "Access-Control-Allow-Origin": "*"
             }
           })
-          if (res.status === 200) {
-            // const signed = await signTransaction(transaction)
-            // const signature = await connection.sendRawTransaction(signed.serialize())
-
-            // await connection.confirmTransaction(signature)
-            let nftType = "";
-            if (nftData.NFT.name.includes("Planetarians")) {
-              nftType = "Planetarians"
-            } else if (nftData.NFT.name.includes("Pet")) {
-              nftType = "Pet"
-            }
-
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/stake_nft`, {
-              walletAddress: publicKey.toString(),
-              mintAddress: nftData.mint,
-              transactionAddress: signature,
-              nftType
-            }, {
-              headers: {
-                "Access-Control-Allow-Origin": "*"
-              }
+          if (data.success) {
+            toast.update(toastId, {
+              render: `${nftData.NFT.name} staked!`,
+              type: "success"
             })
-            if (data.success) {
-              toast.update(toastId, {
-                render: `${nftData.NFT.name} staked!`,
-                type: "success"
-              })
 
-              setStaked(nftData.mint, true)
-            } else {
-              toast.update(toastId, {
-                render: `Something went wrong!`,
-                type: "error"
-              })
-            }
+            setStaked(nftData.mint, true)
+          } else {
+            toast.update(toastId, {
+              render: `Something went wrong!`,
+              type: "error"
+            })
           }
+          // }
         } catch (error) {
           console.log(error)
         }
@@ -225,15 +241,27 @@ const NFTItem: FC<Props> = (props) => {
 
   return (
     <>
-      <div className="nftBox">
-        <img src={nftData.NFT.image} style={{ width: "100%" }} />
+      <div className={nftData.isStaked ? "nftStakedBox" : setSelect ? "nftStakedAnim" : "nftUnstakedBox"}>
+        <img src={nftData.NFT.image} />
         {
-          nftData.isStaked ?
-            <Button variant="contained" className={`${classes.btn} ${classes.unstakeBtn}`} onClick={unstakeNFT} disabled={loading}>unstake</Button>
+          !nftData.isStaked ?
+            // <Button variant="contained" className={classes.btn} onClick={stakeNFT} disabled={loading}>
+            //   Bet
+            // </Button>
+            <>
+              <Box p={1}>
+                <Typography className={classes.symbol}>{nftData.NFT.symbol}</Typography>
+                <Typography className={classes.collectionName}>{nftData.NFT.collection.name}</Typography>
+                <Box display='flex' justifyContent='space-between'>
+                  <Typography className={classes.floorPrice}>Floor</Typography>
+                  <Typography className={classes.floorPrice}>{
+                    //@ts-ignore
+                    nftData.NFT.properties.floorPrice}</Typography>
+                </Box>
+              </Box>
+            </>
             :
-            <Button variant="contained" className={classes.btn} onClick={stakeNFT} disabled={loading}>
-              stake
-            </Button>
+            <Button variant="contained" className={`${classes.btn} ${classes.unstakeBtn}`} onClick={unstakeNFT} disabled={loading}>unstake</Button>
         }
       </div>
     </>

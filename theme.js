@@ -46,9 +46,8 @@ const theme = createTheme({
     a: {
       color: mainBlack,
     },
-    caption: {
-      fontSize: 16,
-      lineHeight: 1.3
+    body1: {
+      fontFamily: 'Golos-Regular'
     }
   },
 });

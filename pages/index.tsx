@@ -16,14 +16,14 @@ import { createTransferInstruction } from 'utills/createTransferInstructions'
 
 import Layout from 'components/Layout'
 import Intro from 'components/Intro'
-import Staking from 'components/Staking'
 import { NFTmap } from 'types/metadata'
+import Jackpot from 'components/Jackpot'
 
 const Home: NextPage = () => {
   const { connection } = useConnection()
   const { publicKey, signTransaction } = useWallet()
   const [loading, setLoading] = useState(false)
-  const [stakedInfo, setStakedInfo] = useState<any>({ totalKamCnt: 0, totalMegamCnt: 0, stakedKamNFTCnt: 0, stakedMegamNFTCnt: 0, tokenCnt: 0 })
+  const [stakedInfo, setStakedInfo] = useState<any>()
 
   const { nftList, setNFTList } = useFetchAllNfts(setLoading)
 
@@ -115,18 +115,20 @@ const Home: NextPage = () => {
           <MagicSpinner size={170} color="#2bc8df" />
         </div>
       }
-      <Layout>
-        <Staking
-          nftList={nftList}
-          stakedInfo={stakedInfo}
-          setStaked={setStaked}
-          // stakeAll={stakeAll}
-          unstakeAll={unstakeAll}
-          getStakedInfo={getStakedInfo}
-          setLoading={setLoading}
-          loading={loading}
-        />
-      </Layout>
+      {stakedInfo &&
+        <Layout>
+          <Jackpot
+            nftList={nftList}
+            stakedInfo={stakedInfo}
+            setStaked={setStaked}
+            // stakeAll={stakeAll}
+            unstakeAll={unstakeAll}
+            getStakedInfo={getStakedInfo}
+            setLoading={setLoading}
+            loading={loading}
+          />
+        </Layout>
+      }
       <ToastContainer />
     </>
   )

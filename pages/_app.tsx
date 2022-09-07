@@ -7,7 +7,6 @@ import { ThemeProvider } from "@mui/material/styles"
 import theme from "theme"
 
 require("@solana/wallet-adapter-react-ui/styles.css")
-
 const WalletConnectionProvider = dynamic(
   () => import("components/WalletConnection/WalletConnectionProvider"),
   {
@@ -16,10 +15,10 @@ const WalletConnectionProvider = dynamic(
 )
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const pageUrl = "https://www.Planetarians.com/"
-  const logoImg = "https://www.Planetarians.com/logo.png"
-  const title = "Planetarians"
-  const description = "Planetarians Staking"
+  const pageUrl = "https://www.gnesis.com/"
+  const logoImg = "https://www.gnesis.com/logo.png"
+  const title = "gnesis"
+  const description = "gnesis Staking"
 
   return (
     <>

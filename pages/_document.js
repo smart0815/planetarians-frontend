@@ -8,31 +8,31 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {/* PWA primary color */}
-          <link rel="shortcut icon" href="/logo.png" />
-          {/* Inject MUI styles first to match with the prepend: true configuration. */}
-          {this.props.emotionStyleTags}
-          <link
-            rel="preload"
-            href="/Square-Bold/Square-Bold.otf"
-            as="font"
-            type="font/woff"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/Square-Bold/Square-Light.otf"
-            as="font"
-            type="font/woff"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/Square-Bold/Square-Regular.otf"
-            as="font"
-            type="font/woff"
-            crossOrigin=""
-          />
+            {/* PWA primary color */}
+            <link rel="shortcut icon" href="/logo.png" />
+            {/* Inject MUI styles first to match with the prepend: true configuration. */}
+            {this.props.emotionStyleTags}
+            <link
+              rel="preload"
+              href="/Square-Bold/Square-Bold.otf"
+              as="font"
+              type="font/woff"
+              crossOrigin=""
+            />
+            <link
+              rel="preload"
+              href="/Square-Bold/Square-Light.otf"
+              as="font"
+              type="font/woff"
+              crossOrigin=""
+            />
+            <link
+              rel="preload"
+              href="/Square-Bold/Square-Regular.otf"
+              as="font"
+              type="font/woff"
+              crossOrigin=""
+            />
         </Head>
         <body>
           <Main />

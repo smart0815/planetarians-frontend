@@ -85,9 +85,6 @@ const Intro: FC<Props> = (props) => {
   return (
     <div className={classes.container}>
       <Container>
-        <Typography variant="h5">
-          Stake and Gain $ORBZ
-        </Typography>
         <Grid container columnSpacing={{ md: 2 }} rowSpacing={{ md: 0, xs: 2 }} style={{ marginTop: 30 }}>
           <Grid item xs={12}>
             <div className={classes.leftSection}>
@@ -97,26 +94,14 @@ const Intro: FC<Props> = (props) => {
               <Grid container spacing={2} alignItems="center" justifyContent="space-around">
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Total Founders Staked</Typography>
+                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Total NFTs Beted</Typography>
                     <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.totalKamCnt} </Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>
                   <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Total Companions Staked</Typography>
-                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.totalMegamCnt} </Typography>
-                  </div>
-                </Grid>
-                <Grid item lg={12} md={12} xs={12}>
-                  <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>You’ve staked</Typography>
-                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.stakedKamNFTCnt} <span style={{ color: "#f99a00", fontSize: "60%" }}>Founder</span></Typography>
-                  </div>
-                </Grid>
-                <Grid item lg={12} md={12} xs={12}>
-                  <div className={classes.smallBox}>
-                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>You’ve staked</Typography>
-                    <Typography variant="h2" style={{ color: "#f99a00" }}>{stakedInfo.stakedMegamNFTCnt} <span style={{ color: "#f99a00", fontSize: "60%" }}>Companion</span></Typography>
+                    <Typography variant="h3" className="typography-center" style={{ color: "#fff" }}>Your rewards</Typography>
+                    <Typography variant="h2" style={{ color: "#7bb664" }}>+{parseFloat(stakedInfo.tokenCnt.toFixed(3))} <span style={{ color: "#7bb664", fontSize: "60%" }}>$ORBZ</span></Typography>
                   </div>
                 </Grid>
                 <Grid item lg={12} md={12} xs={12}>
@@ -128,36 +113,6 @@ const Intro: FC<Props> = (props) => {
               </Grid>
             </div>
           </Grid>
-          {/* <Grid item lg={6} xs={12}>
-            <div className={classes.rightSection}>
-              <Grid container style={{ height: "100%" }}>
-                <Grid item xs={7} style={{ height: "100%" }}>
-                  <div className={classes.inputContainer}>
-                    <Typography variant="h2" style={{ marginBottom: 40, color: "#FBDFA0" }}>
-                      ESTIMATE YOUR REWARDS
-                    </Typography>
-                    <Grid container>
-                      <Grid item xs={6}>
-                        <Typography variant="h3" style={{ marginBottom: 40, color: "#FBDFA0" }}>
-                          Kam1 amount
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Typography variant="h3" style={{ marginBottom: 40, color: "#FBDFA0" }}>
-                          Airdrop amount
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </div>
-                </Grid>
-                <Grid item xs={5}>
-                  <div className={classes.estContainer}>
-
-                  </div>
-                </Grid>
-              </Grid>
-            </div>
-          </Grid> */}
         </Grid>
       </Container>
     </div>

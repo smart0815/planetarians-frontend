@@ -15,6 +15,7 @@ import {
   ListItemText,
   SwipeableDrawer,
   IconButton,
+  Box
 } from "@mui/material";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
@@ -85,11 +86,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    backgroundColor: "#2E203D"
+    backgroundColor: "#181818"
+  },
+  date: {
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '14px',
+    color: '#939393',
+    marginLeft: '12px'
   }
 }));
 
-const Header = () => {
+const Navbar = () => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -103,60 +111,27 @@ const Header = () => {
 
   const tabs = (
     <>
-      <Grid container justifyContent="space-between" alignItems="center" spacing={3}>
-        {/* <Grid item>
-          <Link href="/">
-            <Typography
-              className={classes.link}
-            >
-              Staking
-            </Typography>
-          </Link>
-        </Grid> */}
-        {/* <Grid item>
-          <Link href="/">
-            <Typography
-              className={classes.link}
-            >
-              Roadmap
-            </Typography>
-          </Link>
-        </Grid> */}
-        {/* <Grid item>
-          <Link href="/">
-            <Typography
-              className={classes.link}
-            >
-              Rarity
-            </Typography>
-          </Link>
-        </Grid> */}
-        <Grid item>
-          <Link href="/">
-            <img src="logo.png" />
-          </Link>
-        </Grid>
-        {/* <Grid item>
-          <Link href="/">
-            <Typography
-              className={classes.link}
-            >
-              Manga
-            </Typography>
-          </Link>
-        </Grid> */}
-        {/* <Grid item>
-          <Link href="/">
-            <Typography
-              className={classes.link}
-            >
-              Airdrop
-            </Typography>
-          </Link>
-        </Grid> */}
-        <Grid item>
-          <WalletMultiButton />
-        </Grid>
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Box display='flex'>
+          <Box display='flex' alignItems='center'>
+            <img src='calendar.svg' />
+            <Typography className={classes.date}>1 august 2022</Typography>
+          </Box>
+          <Box display='flex' alignItems='center' ml={4}>
+            <img src='timer.svg' />
+            <Typography className={classes.date}>00:00</Typography>
+          </Box>
+        </Box>
+        <Box display='flex'>
+          <Box display='flex' alignItems='center' mr={4}>
+            <img src='sticky.svg' />
+            <Typography className={classes.date} style={{ color: '#26891E' }}>Old slips</Typography>
+          </Box>
+          <Box display='flex' alignItems='center'>
+            <img src='pin.svg' />
+            <WalletMultiButton />
+          </Box>
+        </Box>
       </Grid>
     </>
   );
@@ -165,54 +140,6 @@ const Header = () => {
       <Grid container>
         <Grid item lg={4} xs={6}>
           <WalletMultiButton />
-        </Grid>
-        <Grid container item xs={6} justifyContent="end">
-          <SwipeableDrawer
-            disableBackdropTransition={!iOS}
-            disableDiscovery={iOS}
-            open={openDrawer}
-            onClose={() => setOpenDrawer(false)}
-            onOpen={() => setOpenDrawer(true)}
-            classes={{ paper: classes.drawer }}
-            anchor="right"
-          >
-            {/* <div className={classes.toolbarMargin} /> */}
-            <List disablePadding>
-              {path.map(({ name, link }) => (
-                <ListItem
-                  key={name}
-                  divider
-                  button
-                  onClick={() => {
-                    setOpenDrawer(false);
-                  }}
-                >
-                  <ListItemText disableTypography>
-                    <Link href={link}>
-                      <Typography
-                        style={{
-                          color:
-                            router.pathname === link
-                              ? "primary"
-                              : "rgb(107 107 107)",
-                          fontWeight: router.pathname === link && "bold",
-                        }}
-                      >
-                        {name}
-                      </Typography>
-                    </Link>
-                  </ListItemText>
-                </ListItem>
-              ))}
-            </List>
-          </SwipeableDrawer>
-          <IconButton
-            onClick={() => setOpenDrawer(!openDrawer)}
-            disableRipple
-            className={classes.drawerIconContainer}
-          >
-            <MenuIcon className={classes.drawerIcon} />
-          </IconButton>
         </Grid>
       </Grid>
     </>
@@ -226,8 +153,7 @@ const Header = () => {
               disableGutters
               style={{
                 margin: "0 auto",
-                width: "100%",
-                padding: matches ? "10px" : "10px",
+                width: "100%"
               }}
             >
               {matches ? drawer : tabs}
@@ -240,4 +166,4 @@ const Header = () => {
     </>
   );
 };
-export default Header;
+export default Navbar;

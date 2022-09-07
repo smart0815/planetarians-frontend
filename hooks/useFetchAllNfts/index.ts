@@ -20,23 +20,16 @@ const useFetchAllNfts = (setLoading: React.Dispatch<React.SetStateAction<boolean
       if (wallet.connected && !!process.env.NEXT_PUBLIC_NFT_UPDATE_AUTHORITY) {
         try {
           setNFTList([])
-          
-          // const nftData = await getParsedNftAccountsByOwner({
-          //   publicAddress: "Cmay1CUVYY1o459k6qBPgRUzTWhHNKXrx2sG3g3Xgrdj",
-          //   connection: connection
-          // })
-          const nftData = await TutorialDataService.getHolderVerify(wallet.publicKey?.toString())
-          if(nftData.data != 'fail') {
+
+          const nftData = await TutorialDataService.getAll(wallet.publicKey?.toString());
+          console.log(nftData.data);
+          if (nftData.data.length) {
             //@ts-ignore
-            nftData.data.forEach(async (element) => {
-              if (JSON.parse(process.env.NEXT_PUBLIC_NFT_UPDATE_AUTHORITY!).includes(element.updateAuthority)) {
-                const { data } = await axios.get<NFT>(element.data.uri)
-                console.log(data, element.mint)
-                setNFTList((nftList) => [...nftList, { NFT: data, mint: element.mint, isStaked: false }])
-              }
+            nftData.data.filter(element=>!element.animation_url).forEach(async (element) => {
+              setNFTList((nftList) => [...nftList, { NFT: element, mint: element.mintkey, isStaked: false }])
             })
           }
-          
+
           const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/staked_nfts`, {
             walletAddress: wallet.publicKey?.toString()
           }, {

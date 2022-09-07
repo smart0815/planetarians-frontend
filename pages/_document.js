@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
             {/* PWA primary color */}
-            <link rel="shortcut icon" href="/logo.png" />
+            <link rel="shortcut icon" href="/logo192.png" />
             {/* Inject MUI styles first to match with the prepend: true configuration. */}
             {this.props.emotionStyleTags}
             <link

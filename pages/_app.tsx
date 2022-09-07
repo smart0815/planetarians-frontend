@@ -17,14 +17,14 @@ const WalletConnectionProvider = dynamic(
 function MyApp({ Component, pageProps }: AppProps) {
   const pageUrl = "https://www.gnesis.com/"
   const logoImg = "https://www.gnesis.com/logo.png"
-  const title = "gnesis"
-  const description = "gnesis Staking"
+  const title = "JackPot"
+  const description = "JackPot "
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo192.png" />
         <meta name="description" key="description" content={description} />
         <meta property="og:title" key="og:title" content={title} />
         <meta property="og:url" key="og:url" content={pageUrl} />
